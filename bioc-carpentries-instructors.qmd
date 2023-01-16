@@ -24,8 +24,6 @@ instructors <- read_delim("https://raw.githubusercontent.com/Bioconductor/biocon
   filter(Name != "----------")
 ```
 
-## Bioconductor Carpentries Instructors
-
 Below is the table and map showing people in the Bioconductor community who are certified Carpentries instructors. If you are one and don't see your name, please add yourself as described in [this GitHub issue](https://github.com/Bioconductor/bioconductor-teaching/issues/22#issuecomment-1384258079).
 
 ```{r}
@@ -42,7 +40,7 @@ instructors_geocoded <- instructors |>
 
 ```{r}
 #| eval: true
-# need a better way to do this to automate, currently have to get the locations locally using code above then hardcode them as below, as needs Google Maps API key to get the geocode info
+# need to find a way to automate this, currently have to get the locations locally using code above then hardcode them as below, as needs Google Maps API key to get the geocode info
 
 instructors_geocoded <- tibble::tribble(
   ~...1,                ~Name,                ~Location,                   ~Institution,                                 ~www, ~...6,        ~lon,       ~lat,
