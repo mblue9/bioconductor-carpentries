@@ -1,0 +1,4 @@
+- source: project
+  quarto-pub:
+    - id: 3874dcb7-1a5f-42e2-b629-6496005f613c
+      url: 'https://quartopub.com/sites/mblue9/bioconductor-carpentries'
