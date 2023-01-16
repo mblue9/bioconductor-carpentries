@@ -27,16 +27,10 @@ instructors <- read_delim("https://raw.githubusercontent.com/Bioconductor/biocon
 Below is the table and map showing people in the Bioconductor community who are certified Carpentries instructors. If you are one and don't see your name, please add yourself as described in [this GitHub issue](https://github.com/Bioconductor/bioconductor-teaching/issues/22#issuecomment-1384258079).
 
 ```{r}
-instructors |> 
-  select(Name, Institution, Location) |> 
-  arrange(Name) |> 
-  reactable()
-```
-
-```{r}
 instructors_geocoded <- instructors |> 
   mutate_geocode(Location)
 ```
+
 
 ```{r}
 #| eval: true
@@ -50,6 +44,14 @@ instructors_geocoded <- tibble::tribble(
      NA,     "Robert Castelo",       "Barcelona, Spain",      "Pompeu Fabra University", "https://functionalgenomics.upf.edu",    NA,    2.168568, 41.3873974,
      NA,       "Kozo Nishida",           "Tokyo, Japan",              "Riken Institute",           "https://github.com/kozo2",    NA, 139.6503106, 35.6761919
   )
+```
+
+```{r}
+#| eval: true
+instructors_geocoded |> 
+  select(Name, Institution, Location) |> 
+  arrange(Name) |> 
+  reactable()
 ```
 
 ```{r}
