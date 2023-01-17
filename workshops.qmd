@@ -6,52 +6,40 @@ execute:
   message: false
   warning: false
   echo: false
-  eval: false
 ---
 
 ```{r}
-#| eval: true
 library(tidyr)
 library(reactable)
 library(ggmap)
 library(plotly)
 ```
 
+```{r}
+# workshop info is not yet in md file, if it is could import from there
+workshops <- tibble::tribble(
+          ~Event,   ~Location,    ~Date,
+          "UCLouvain", "Brussels", "March 2023",
+              NA,    "Boston", "March 2023",
+      "Bioc2023",          "Boston", "August 2023",
+  "EuroBioc2023",          "Ghent", "September 2023",
+  ) 
+```
+
 
 ```{r}
-workshops <- tibble::tribble(
-          ~Event,   ~Location,    ~Date, ~Contact,
-              NA, "UCLouvain", "March 2023",       NA,
-              NA,    "Boston", "Mar 2023",       NA,
-      "Bioc2023",          NA, "Aug 2023",       NA,
-  "EuroBioc2023",          NA, "Sep 2023",       NA
-  )
-
+# get coordinates to map
 workshops_geocoded <- workshops |> 
-  drop_na(Location) |> 
   mutate_geocode(Location)
 ```
 
-
 ```{r}
-#| eval: true
-# need to find a way to automate this, currently have to get the locations locally using code above then hardcode them as below, as needs Google Maps API key to get the geocode info
-workshops_geocoded <- tibble::tribble(
-  ~Event,   ~Location,        ~Date, ~Contact,        ~lon,       ~lat,
-      NA, "UCLouvain", "March 2023",       NA,    4.615875, 50.6696767,
-      NA,    "Boston",   "Mar 2023",       NA, -71.0588801, 42.3600825
-  )
+workshops_geocoded |> 
+  select(-lon, -lat) |>
+  reactable()
 ```
 
-
 ```{r}
-#| eval: true
-reactable(workshops_geocoded)
-```
-
-
-```{r}
-#| eval: true
 world <- map_data("world")
 
 gg <- ggplot() +

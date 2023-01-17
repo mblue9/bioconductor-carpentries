@@ -23,27 +23,15 @@ instructors <- read_delim("https://raw.githubusercontent.com/Bioconductor/biocon
   filter(Name != "----------")
 ```
 
-This is the table and map showing people in the Bioconductor community who are certified Carpentries instructors. If you are one and don't see your name, please add yourself as described in [this GitHub issue](https://github.com/Bioconductor/bioconductor-teaching/issues/22#issuecomment-1384258079).
+Map and table showing people in the Bioconductor community who are certified Carpentries instructors. If you are one and don't see your name, please add yourself as described in [this GitHub issue](https://github.com/Bioconductor/bioconductor-teaching/issues/22#issuecomment-1384258079).
 
 ```{r}
-# Get geocodes to map, and add www link to Name
+# get coordinates to map
 instructors_geocoded <- instructors |> 
   mutate_geocode(Location)
 ```
-
 ```{r}
-instructors_geocoded |>   
-    select(Name, Institution, Location) |> 
-  reactable(columns = list(
-    Name = colDef(cell = function(value, index) {
-      # Render as a link
-      htmltools::tags$a(href = instructors_geocoded$www[index], target = "_blank", as.character(value))
-      })
-    ), 
-    defaultSorted = "Name")
-```
-
-```{r}
+# Map of instructors
 world <- map_data("world")
 
 gg <- ggplot() +
@@ -53,3 +41,20 @@ gg <- ggplot() +
 
 ggplotly(gg, tooltip = "text")
 ```
+
+
+```{r}
+# Table of instructors
+instructors_geocoded |>   
+    select(Name, Institution, Location) |> 
+  reactable(columns = list(
+    Name = colDef(cell = function(value, index) {
+      # Render as a link
+      htmltools::tags$a(href = instructors_geocoded$www[index], target = "_blank", as.character(value))
+      })
+    ), 
+    defaultSorted = "Name",
+    defaultPageSize = 100)
+```
+
+

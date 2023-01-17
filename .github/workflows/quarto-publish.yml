@@ -1,4 +1,7 @@
 on:
+  # Triggers the workflow every 5 minutes
+  schedule:
+    - cron: "*/5 * * * *"
   push:
     branches: main
 
