@@ -45,6 +45,7 @@ workshops_geocoded <- tibble::tribble(
 
 
 ```{r}
+#| eval: true
 reactable(workshops_geocoded)
 ```
 
