@@ -10,7 +10,7 @@ jobs:
     permissions:
       contents: write
     env:
-        GOOGLE_MAPS_KEY: ${{ secrets.GOOGLE_MAPS_KEY }}  
+        GGMAP_GOOGLE_API_KEY: ${{ secrets.GOOGLE_MAPS_KEY }}  
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
