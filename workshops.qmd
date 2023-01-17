@@ -19,7 +19,6 @@ library(plotly)
 
 
 ```{r}
-#| echo: false
 workshops <- tibble::tribble(
           ~Event,   ~Location,    ~Date, ~Contact,
               NA, "UCLouvain", "March 2023",       NA,
@@ -28,11 +27,6 @@ workshops <- tibble::tribble(
   "EuroBioc2023",          NA, "Sep 2023",       NA
   )
 
-reactable(workshops)
-```
-
-
-```{r}
 workshops_geocoded <- workshops |> 
   drop_na(Location) |> 
   mutate_geocode(Location)
@@ -48,6 +42,12 @@ workshops_geocoded <- tibble::tribble(
       NA,    "Boston",   "Mar 2023",       NA, -71.0588801, 42.3600825
   )
 ```
+
+
+```{r}
+reactable(workshops_geocoded)
+```
+
 
 ```{r}
 #| eval: true
