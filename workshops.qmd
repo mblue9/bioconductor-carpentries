@@ -10,9 +10,9 @@ execute:
 ---
 
 ```{r}
+#| eval: true
 library(tidyr)
 library(reactable)
-library(ggplot2)
 library(ggmap)
 library(plotly)
 ```
