@@ -6,6 +6,7 @@ execute:
   message: false
   warning: false
   echo: false
+  eval: false
 ---
 
 ```{r}
@@ -34,6 +35,17 @@ reactable(workshops)
 workshops_geocoded <- workshops |> 
   drop_na(Location) |> 
   mutate_geocode(Location)
+```
+
+
+```{r}
+#| eval: true
+# need to find a way to automate this, currently have to get the locations locally using code above then hardcode them as below, as needs Google Maps API key to get the geocode info
+workshops_geocoded <- tibble::tribble(
+  ~Event,   ~Location,        ~Date, ~Contact,        ~lon,       ~lat,
+      NA, "UCLouvain", "March 2023",       NA,    4.615875, 50.6696767,
+      NA,    "Boston",   "Mar 2023",       NA, -71.0588801, 42.3600825
+  )
 ```
 
 ```{r}
