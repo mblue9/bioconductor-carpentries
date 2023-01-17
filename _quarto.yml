@@ -4,9 +4,8 @@ website:
   title: "Bioconductor Carpentries"
   navbar:
     left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+      - workshops.qmd
+      - instructors.qmd
 format:
   html:
     theme: cosmo

@@ -4,3 +4,4 @@
 .Rproj.user
 .Rprofile
 renv
+.DS_Store

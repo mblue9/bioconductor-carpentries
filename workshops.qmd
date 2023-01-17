@@ -1,0 +1,49 @@
+---
+title: "Workshops"
+format: html
+editor: visual
+execute:
+  message: false
+  warning: false
+  echo: false
+---
+
+```{r}
+library(tidyr)
+library(reactable)
+library(ggmap)
+library(plotly)
+```
+
+
+```{r}
+#| echo: false
+workshops <- tibble::tribble(
+          ~Event,   ~Location,    ~Date, ~Contact,
+              NA, "UCLouvain", "March 2023",       NA,
+              NA,    "Boston", "Mar 2023",       NA,
+      "Bioc2023",          NA, "Aug 2023",       NA,
+  "EuroBioc2023",          NA, "Sep 2023",       NA
+  )
+
+reactable(workshops)
+```
+
+
+```{r}
+workshops_geocoded <- workshops |> 
+  drop_na(Location) |> 
+  mutate_geocode(Location)
+```
+
+```{r}
+#| eval: true
+world <- map_data("world")
+
+gg <- ggplot() +
+  geom_polygon(data = world, aes(x = long, y = lat, group = group), fill = "grey") +
+  geom_jitter(data = workshops_geocoded, aes(x = lon, y = lat, text = paste(Event, Location, sep = "\n")), color = 'red') +
+  theme_void()
+
+ggplotly(gg, tooltip = "text")
+```

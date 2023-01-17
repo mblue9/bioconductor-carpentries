@@ -1,12 +1,12 @@
 ---
-title: "Bioconductor Carpentries Instructors"
+title: "Instructors"
 format: html
 editor: visual
 execute:
-  echo: false
-  eval: false
   message: false
   warning: false
+  echo: false
+  eval: false
 ---
 
 ```{r}
@@ -24,7 +24,7 @@ instructors <- read_delim("https://raw.githubusercontent.com/Bioconductor/biocon
   filter(Name != "----------")
 ```
 
-Below is the table and map showing people in the Bioconductor community who are certified Carpentries instructors. If you are one and don't see your name, please add yourself as described in [this GitHub issue](https://github.com/Bioconductor/bioconductor-teaching/issues/22#issuecomment-1384258079).
+This is the table and map showing people in the Bioconductor community who are certified Carpentries instructors. If you are one and don't see your name, please add yourself as described in [this GitHub issue](https://github.com/Bioconductor/bioconductor-teaching/issues/22#issuecomment-1384258079).
 
 ```{r}
 instructors_geocoded <- instructors |> 
