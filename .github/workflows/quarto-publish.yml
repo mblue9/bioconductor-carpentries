@@ -1,7 +1,7 @@
 on:
-  # Triggers the workflow every day at midnight UTC
+  # Triggers the workflow Sunday at midnight UTC
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 0 * * 0"
   push:
     branches: main
 
