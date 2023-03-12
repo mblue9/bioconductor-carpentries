@@ -20,41 +20,84 @@ library(plotly)
 ```{r}
 # import data and format
 instructors <- read_delim("https://raw.githubusercontent.com/Bioconductor/bioconductor-teaching/master/bioc-instructors.md", delim = '|', trim_ws = TRUE) |> 
-  filter(Name != "----------")
+  filter(Name != "----------") |> 
+  mutate(Status = "Certified")
 ```
 
-Map and table showing people in the Bioconductor community who are certified Carpentries instructors. If you are one and don't see your name, please add yourself as described in [this GitHub issue](https://github.com/Bioconductor/bioconductor-teaching/issues/22#issuecomment-1384258079).
+Map and table showing people in the Bioconductor community who are certified Carpentries instructors or in the process of obtaining certification, such as those in the [Bioconductor Carpentries training program](https://bioconductor.github.io/biocblog/posts/2023-02-24-carpentries-update/). If you are certified and don't see your name, please add yourself as described in [this GitHub issue](https://github.com/Bioconductor/bioconductor-teaching/issues/22#issuecomment-1384258079).
+
+See [this page](workshops.html) for Bioconductor Carpentries Workshops.
 
 ```{r}
 # get coordinates to map
 instructors_geocoded <- instructors |> 
   mutate_geocode(Location)
 ```
+
+```{r}
+#| echo: false
+
+# add instructor trainees from Bioc Carpentries 
+trainees <- tibble::tribble(
+                                  ~Name,                                                   ~Institution,    ~Location,  ~Status,        ~lon,        ~lat,
+               "Fabricio Almeida-Silva",                   "VIB-UGent Center for Plant Systems Biology",      "Ghent",  "Newly Certified",  3.7303351,  51.0500182,
+                  "Anand Ruban Agarvas",                               "University Hospital Heidelberg", "Heidelberg",  "In Progress",     8.6724335,  49.3987524,
+                         "Oliver Crook",                                          "University of Oxford",     "Oxford",  "In Progress",    -1.2577263,  51.7520209,
+                          "Almut Lütge", "University of Zürich, Departement of Molecular Life Sciences",     "Zurich",  "Newly Certified",      8.541694,  47.3768866,
+                            "Leo Lahti",                                          "University of Turku",      "Turku",  "Newly Certified",    22.2666303,  60.4518126,
+                            "Sehyun Oh",                                  "City University of New York",   "New York",  "Newly Certified",   -74.0059728,  40.7127753,
+                           "Umar Ahmad",                                      "Bauchi State University",      "Gadau",  "In Progress",    10.1661239,  11.8328495,
+                        "Chia Sin Liew",                               "University of Nebraska-Lincoln",   "Nebraska",  "Newly Certified",   -99.9018131,  41.4925374,
+                  "Charlotte Hutchings",                                      "University of Cambridge",  "Cambridge",  "Newly Certified",     0.1312729,  52.1950788,
+                   "Mercilena Benjamin",                       "All India Institute of Medical Science",  "New Delhi",  "In Progress",    77.2090212,  28.6139391,
+                           "David Shih",                                      "University of Hong Kong",  "Hong Kong",  "In Progress",   114.1693611,  22.3193039,
+  "Rodrigo Arcoverde Cerveira da Silva",                                        "Karolinska Institute",  "Stockholm",  "In Progress",    18.0685808,  59.3293235,
+             "Javier Carpinteyro Ponce",                                       "University of Maryland",   "Maryland",  "In Progress",   -76.6412712,  39.0457549,
+                           "Zuguang Gu",                                "German Cancer Research Center", "Heidelberg",  "In Progress",     8.6724335,  49.3987524,
+                        "Givanna Putri",          "Walter and Eliza Hall Institute of Medical Research",  "Melbourne",  "In Progress",   144.9630576, -37.8136276,
+                     "Zedias Chikwambi",                            "Chinhoyi University of Technology",   "Chinhoyi",  "In Progress",    30.1987245, -17.3622214,
+                  "Pageneck Chikondowa",       "African Institute of Biomedical Science and Technology",     "Harare",  "In Progress",    31.0492259, -17.8216288,
+                          "Marie Hidjo",       "African Institute of Biomedical Science and Technology",     "Harare",  "In Progress",    31.0492259, -17.8216288
+  )
+```
+
+```{r}
+# Combine
+all <- bind_rows(instructors_geocoded, trainees) |> 
+  mutate(Status = factor(Status, levels = c("Certified", "Newly Certified", "In Progress")))
+```
+
 ```{r}
 # Map of instructors
 world <- map_data("world")
 
 gg <- ggplot() +
   geom_polygon(data = world, aes(x = long, y = lat, group = group), fill = "grey") +
-  geom_jitter(data = instructors_geocoded, aes(x = lon, y = lat, text = paste(Name, Institution, sep = "\n")), color = 'red') +
+  geom_jitter(data = all, aes(x = lon, y = lat, text = paste(Name, Institution, sep = "\n"), colour = Status, shape = Status, size = Status)) +
+  scale_colour_manual(values = c("Certified"="blue", "Newly Certified"="gold", "In Progress"="red")) +
+  scale_shape_manual(values = c("Certified"=20, "Newly Certified"=18, "In Progress"=20)) +
+  scale_size_manual(values = c("Certified"=1, "Newly Certified"=1, "In Progress"=1)) +
   theme_void()
 
 ggplotly(gg, tooltip = "text")
 ```
 
-
 ```{r}
 # Table of instructors
-instructors_geocoded |>   
-    select(Name, Institution, Location) |> 
+all |>   
+    select(Name, Institution, Location, Status) |> 
   reactable(columns = list(
     Name = colDef(cell = function(value, index) {
       # Render as a link
-      htmltools::tags$a(href = instructors_geocoded$www[index], target = "_blank", as.character(value))
+      htmltools::tags$a(href = all$www[index], target = "_blank", as.character(value))
       })
     ), 
     defaultSorted = "Name",
     defaultPageSize = 100)
 ```
 
+However, looking at the world population density below from [Our World in Data](https://ourworldindata.org/grapher/population-density), we can see there are highly dense areas that have no or few trainers (e.g. India, China, Middle East, Africa, Latin America) so we still have a bit of a way to go!
 
+<iframe src="https://ourworldindata.org/grapher/population-density" loading="lazy" style="width: 100%; height: 600px; border: 0px none;">
+
+</iframe>

@@ -15,17 +15,18 @@ library(ggmap)
 library(plotly)
 ```
 
+Workshops using the [Bioconductor Carpentries](https://www.bioconductor.org/help/education-training/) training material. See [this page](instructors.html) for Bioconductor Carpentries Instructors.
+
 ```{r}
 # workshop info is not yet in md file, if it is could import from there
 workshops <- tibble::tribble(
-          ~Event,   ~Location,    ~Date,
-          "UCLouvain", "Brussels", "March 2023",
-              NA,    "Boston", "March 2023",
-      "Bioc2023",          "Boston", "August 2023",
-  "EuroBioc2023",          "Ghent", "September 2023",
+          ~Date,  ~Event,  ~www,   ~Location,  ~Instructors,
+          "March 2023", "UCLouvain",  NA,  "Brussels", "Laurent Gatto",
+          "March 2023",  "",  "",  "Boston", "",
+       "31 July 2023",  "BioC2023",  "https://bioc2023.bioconductor.org/",  "Boston",  "TBA",
+  "18 September 2023",  "EuroBioC2023", "https://eurobioc2023.bioconductor.org/",  "Ghent", "TBA"
   ) 
 ```
-
 
 ```{r}
 # get coordinates to map
@@ -33,11 +34,6 @@ workshops_geocoded <- workshops |>
   mutate_geocode(Location)
 ```
 
-```{r}
-workshops_geocoded |> 
-  select(-lon, -lat) |>
-  reactable()
-```
 
 ```{r}
 world <- map_data("world")
@@ -48,4 +44,16 @@ gg <- ggplot() +
   theme_void()
 
 ggplotly(gg, tooltip = "text")
+```
+
+```{r}
+workshops_geocoded |> 
+  select(-lon, -lat, -www) |>
+  reactable(columns = list(
+    Event = colDef(cell = function(value, index) {
+      # Render as a link
+      htmltools::tags$a(href = workshops_geocoded$www[index], target = "_blank", as.character(value))
+      })
+    ), 
+    defaultPageSize = 100)
 ```
