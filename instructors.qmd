@@ -96,7 +96,7 @@ all |>
     defaultPageSize = 100)
 ```
 
-However, looking at the world population density below from [Our World in Data](https://ourworldindata.org/grapher/population-density), we can see there are highly dense areas that have no or few trainers (e.g. India, China, Middle East, Africa, Latin America) so we still have a bit of a way to go!
+However, looking at the world population density below from [Our World in Data](https://ourworldindata.org/grapher/population-density), we can see there are highly dense areas that have no or few trainers (e.g. India, China, Middle East, Africa, Latin America) so we still have a bit of a way to go! 🌍🌎🌏
 
 <iframe src="https://ourworldindata.org/grapher/population-density" loading="lazy" style="width: 100%; height: 600px; border: 0px none;">
 

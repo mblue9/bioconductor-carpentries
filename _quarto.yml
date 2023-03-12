@@ -6,6 +6,10 @@ website:
     left:
       - workshops.qmd
       - instructors.qmd
+    right:
+      - icon: github
+        href: https://github.com/mblue9/bioconductor-carpentries/
+        aria-label: GitHub
 format:
   html:
     theme: cosmo
