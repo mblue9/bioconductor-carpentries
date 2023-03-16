@@ -43,7 +43,7 @@ trainees <- tibble::tribble(
                "Fabricio Almeida-Silva",                   "VIB-UGent Center for Plant Systems Biology",      "Ghent",  "Newly Certified",  3.7303351,  51.0500182,
                   "Anand Ruban Agarvas",                               "University Hospital Heidelberg", "Heidelberg",  "In Progress",     8.6724335,  49.3987524,
                          "Oliver Crook",                                          "University of Oxford",     "Oxford",  "In Progress",    -1.2577263,  51.7520209,
-                          "Almut Lütge", "University of Zürich, Departement of Molecular Life Sciences",     "Zurich",  "Newly Certified",      8.541694,  47.3768866,
+                          "Almut Lütge", "University of Zürich, Department of Molecular Life Sciences",     "Zurich",  "Newly Certified",      8.541694,  47.3768866,
                             "Leo Lahti",                                          "University of Turku",      "Turku",  "Newly Certified",    22.2666303,  60.4518126,
                             "Sehyun Oh",                                  "City University of New York",   "New York",  "Newly Certified",   -74.0059728,  40.7127753,
                            "Umar Ahmad",                                      "Bauchi State University",      "Gadau",  "In Progress",    10.1661239,  11.8328495,
@@ -79,8 +79,12 @@ gg <- ggplot() +
   scale_size_manual(values = c("Certified"=1, "Newly Certified"=1, "In Progress"=1)) +
   theme_void()
 
-ggplotly(gg, tooltip = "text")
+ggplotly(gg, tooltip = "text") |> 
+  layout(width=700, height=450,
+         legend = list(orientation = "h", x = 0.25, y = -0.02))
 ```
+
+<br></br>
 
 ```{r}
 # Table of instructors
@@ -94,6 +98,7 @@ all |>
     ), 
     defaultSorted = "Name",
     defaultPageSize = 100)
+
 ```
 
 However, looking at the world population density below from [Our World in Data](https://ourworldindata.org/grapher/population-density), we can see there are highly dense areas that have no or few trainers (e.g. India, China, Middle East, Africa, Latin America) so we still have a bit of a way to go! 🌍🌎🌏
