@@ -53,7 +53,7 @@ trainees <- tibble::tribble(
                            "David Shih",                                      "University of Hong Kong",  "Hong Kong",  "In Progress",   114.1693611,  22.3193039,
   "Rodrigo Arcoverde Cerveira da Silva",                                        "Karolinska Institute",  "Stockholm",  "In Progress",    18.0685808,  59.3293235,
              "Javier Carpinteyro Ponce",                                       "University of Maryland",   "Maryland",  "In Progress",   -76.6412712,  39.0457549,
-                           "Zuguang Gu",                                "German Cancer Research Center", "Heidelberg",  "In Progress",     8.6724335,  49.3987524,
+                           "Zuguang Gu",                                "German Cancer Research Center", "Heidelberg",  "Newly Certified",     8.6724335,  49.3987524,
                         "Givanna Putri",          "Walter and Eliza Hall Institute of Medical Research",  "Melbourne",  "In Progress",   144.9630576, -37.8136276,
                      "Zedias Chikwambi",                            "Chinhoyi University of Technology",   "Chinhoyi",  "In Progress",    30.1987245, -17.3622214,
                   "Pageneck Chikondowa",       "African Institute of Biomedical Science and Technology",     "Harare",  "In Progress",    31.0492259, -17.8216288,
