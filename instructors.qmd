@@ -50,7 +50,7 @@ trainees <- tibble::tribble(
                         "Chia Sin Liew",                               "University of Nebraska-Lincoln",   "Nebraska",  "Newly Certified",   -99.9018131,  41.4925374,
                   "Charlotte Hutchings",                                      "University of Cambridge",  "Cambridge",  "Newly Certified",     0.1312729,  52.1950788,
                    "Mercilena Benjamin",                       "All India Institute of Medical Science",  "New Delhi",  "In Progress",    77.2090212,  28.6139391,
-                           "David Shih",                                      "University of Hong Kong",  "Hong Kong",  "In Progress",   114.1693611,  22.3193039,
+                           "David Shih",                                      "University of Hong Kong",  "Hong Kong",  "Newly Certified",   114.1693611,  22.3193039,
   "Rodrigo Arcoverde Cerveira da Silva",                                        "Karolinska Institute",  "Stockholm",  "Newly Certified",    18.0685808,  59.3293235,
              "Javier Carpinteyro Ponce",                                       "University of Maryland",   "Maryland",  "In Progress",   -76.6412712,  39.0457549,
                            "Zuguang Gu",                                "German Cancer Research Center", "Heidelberg",  "Newly Certified",     8.6724335,  49.3987524,
