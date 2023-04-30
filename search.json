@@ -1,16 +1,16 @@
 [
   {
+    "objectID": "instructors.html",
+    "href": "instructors.html",
+    "title": "Instructors",
+    "section": "",
+    "text": "Map and table showing people in the Bioconductor community who are certified Carpentries instructors or in the process of obtaining certification, such as those in the Bioconductor Carpentries training program. If you are certified and don’t see your name, please add yourself as described in this GitHub issue.\nSee this page for Bioconductor Carpentries Workshops.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHowever, looking at the world population density below from Our World in Data, we can see there are highly dense areas that have no or few trainers (e.g. India, China, Middle East, Africa, Latin America) so we still have a bit of a way to go! 🌍🌎🌏"
+  },
+  {
     "objectID": "workshops.html",
     "href": "workshops.html",
     "title": "Workshops",
     "section": "",
     "text": "Workshops using the Bioconductor Carpentries training material. See this page for Bioconductor Carpentries Instructors."
-  },
-  {
-    "objectID": "instructors.html",
-    "href": "instructors.html",
-    "title": "Instructors",
-    "section": "",
-    "text": "Map and table showing people in the Bioconductor community who are certified Carpentries instructors or in the process of obtaining certification, such as those in the Bioconductor Carpentries training program. If you are certified and don’t see your name, please add yourself as described in this GitHub issue.\nSee this page for Bioconductor Carpentries Workshops.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHowever, looking at the world population density below from Our World in Data, we can see there are highly dense areas that have no or few trainers (e.g. India, China, Middle East, Africa, Latin America) so we still have a bit of a way to go! 🌍🌎🌏"
   }
 ]
