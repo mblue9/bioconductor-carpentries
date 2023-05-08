@@ -43,7 +43,7 @@ trainees <- tibble::tribble(
                "Fabricio Almeida-Silva",                   "VIB-UGent Center for Plant Systems Biology",      "Ghent",  "Newly Certified",  3.7303351,  51.0500182,
                   "Anand Ruban Agarvas",                               "University Hospital Heidelberg", "Heidelberg",  "In Progress",     8.6724335,  49.3987524,
                          "Oliver Crook",                                          "University of Oxford",     "Oxford",  "In Progress",    -1.2577263,  51.7520209,
-                          "Almut Lütge", "University of Zürich, Department of Molecular Life Sciences",     "Zurich",  "Newly Certified",      8.541694,  47.3768866,
+                          "Almut Lütge", "University of Zürich",     "Zurich",  "Newly Certified",      8.541694,  47.3768866,
                             "Leo Lahti",                                          "University of Turku",      "Turku",  "Newly Certified",    22.2666303,  60.4518126,
                             "Sehyun Oh",                                  "City University of New York",   "New York",  "Newly Certified",   -74.0059728,  40.7127753,
                            "Umar Ahmad",                                      "Bauchi State University",      "Gadau",  "In Progress",    10.1661239,  11.8328495,
@@ -55,9 +55,9 @@ trainees <- tibble::tribble(
              "Javier Carpinteyro Ponce",                                       "University of Maryland",   "Maryland",  "In Progress",   -76.6412712,  39.0457549,
                            "Zuguang Gu",                                "German Cancer Research Center", "Heidelberg",  "Newly Certified",     8.6724335,  49.3987524,
                         "Givanna Putri",          "Walter and Eliza Hall Institute of Medical Research",  "Melbourne",  "Newly Certified",   144.9630576, -37.8136276,
-                     "Zedias Chikwambi",                            "Chinhoyi University of Technology",   "Chinhoyi",  "In Progress",    30.1987245, -17.3622214,
-                  "Pageneck Chikondowa",       "African Institute of Biomedical Science and Technology",     "Harare",  "In Progress",    31.0492259, -17.8216288,
-                          "Marie Hidjo",       "African Institute of Biomedical Science and Technology",     "Harare",  "In Progress",    31.0492259, -17.8216288
+                     "Zedias Chikwambi",                            "Chinhoyi University of Technology",   "Chinhoyi",  "Newly Certified",    30.1987245, -17.3622214,
+                  "Pageneck Chikondowa",       "African Institute of Biomedical Science and Technology",     "Harare",  "Newly Certified",    31.0492259, -17.8216288,
+                          "Marie Hidjo",       "African Institute of Biomedical Science and Technology",     "Harare",  "Newly Certified",    31.0492259, -17.8216288
   )
 ```
 
