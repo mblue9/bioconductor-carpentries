@@ -19,7 +19,7 @@ library(plotly)
 
 ```{r}
 # import data and format
-instructors <- read_delim("https://raw.githubusercontent.com/Bioconductor/bioconductor-teaching/master/bioc-instructors.md", delim = '|', trim_ws = TRUE) |> 
+instructors <- read_delim("https://raw.githubusercontent.com/Bioconductor/bioconductor-teaching/devel/bioc-instructors.md", delim = '|', trim_ws = TRUE) |> 
   filter(Name != "----------") |> 
   mutate(Status = "Certified")
 ```
