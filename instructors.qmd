@@ -69,10 +69,11 @@ all <- bind_rows(instructors_geocoded, trainees) |>
 
 ```{r}
 # Map of instructors
-world <- map_data("world")
+world_map <- map_data("world")
+world_map <- subset(world_map, region != "Antarctica")
 
 gg <- ggplot() +
-  geom_polygon(data = world, aes(x = long, y = lat, group = group), fill = "grey") +
+  geom_polygon(data = world_map, aes(x = long, y = lat, group = group), fill = "grey") +
   geom_jitter(data = all, aes(x = lon, y = lat, text = paste(Name, Institution, sep = "\n"), colour = Status, shape = Status, size = Status)) +
   scale_colour_manual(values = c("Certified"="blue", "Newly Certified"="gold", "In Progress"="red")) +
   scale_shape_manual(values = c("Certified"=20, "Newly Certified"=18, "In Progress"=20)) +
