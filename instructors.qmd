@@ -52,7 +52,7 @@ trainees <- tibble::tribble(
                    "Mercilena Benjamin",                       "All India Institute of Medical Science",  "New Delhi",  "In Progress",    77.2090212,  28.6139391,
                            "David Shih",                                      "University of Hong Kong",  "Hong Kong",  "Newly Certified",   114.1693611,  22.3193039,
   "Rodrigo Arcoverde Cerveira da Silva",                                        "Karolinska Institute",  "Stockholm",  "Newly Certified",    18.0685808,  59.3293235,
-             "Javier Carpinteyro Ponce",                                       "University of Maryland",   "Maryland",  "In Progress",   -76.6412712,  39.0457549,
+             "Javier Carpinteyro Ponce",                                       "University of Maryland",   "Maryland",  "Newly Certified",   -76.6412712,  39.0457549,
                            "Zuguang Gu",                                "German Cancer Research Center", "Heidelberg",  "Newly Certified",     8.6724335,  49.3987524,
                         "Givanna Putri",          "Walter and Eliza Hall Institute of Medical Research",  "Melbourne",  "Newly Certified",   144.9630576, -37.8136276,
                      "Zedias Chikwambi",                            "Chinhoyi University of Technology",   "Chinhoyi",  "Newly Certified",    30.1987245, -17.3622214,
