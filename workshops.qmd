@@ -23,7 +23,8 @@ workshops <- tibble::tribble(
           ~Date,  ~Event,  ~www,   ~Location,  ~Instructors,
           "March 2023", "UCLouvain",  NA,  "Brussels", "Laurent Gatto",
        "31 July 2023",  "BioC2023",  "https://bioc2023.bioconductor.org/",  "Boston",  "TBA",
-  "18 September 2023",  "EuroBioC2023", "https://eurobioc2023.bioconductor.org/",  "Ghent", "TBA"
+  "18 September 2023",  "EuroBioC2023", "https://eurobioc2023.bioconductor.org/",  "Ghent", "TBA",
+ "12/13 October 2023", "Carnegie Institution", "https://bse.carnegiescience.edu", "Baltimore", "Javier Carpinteyro-Ponce, Frederick Tan"
   ) 
 ```
 
