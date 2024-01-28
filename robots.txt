@@ -1,1 +1,1 @@
-Sitemap: https://github.com/mblue9/bioconductor-carpentries/sitemap.xml
+Sitemap: https://mblue9.github.io/bioconductor-carpentries/sitemap.xml
