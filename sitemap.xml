@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://mblue9.github.io/bioconductor-carpentries/instructors.html</loc>
-    <lastmod>2024-02-04T01:10:56.940Z</lastmod>
+    <loc>https://mblue9.github.io/bioconductor-carpentries/workshops.html</loc>
+    <lastmod>2024-02-11T01:11:02.905Z</lastmod>
   </url>
   <url>
-    <loc>https://mblue9.github.io/bioconductor-carpentries/workshops.html</loc>
-    <lastmod>2024-02-04T01:10:56.940Z</lastmod>
+    <loc>https://mblue9.github.io/bioconductor-carpentries/instructors.html</loc>
+    <lastmod>2024-02-11T01:11:02.905Z</lastmod>
   </url>
 </urlset>
