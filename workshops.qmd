@@ -20,11 +20,22 @@ Workshops using the [Bioconductor Carpentries](https://www.bioconductor.org/help
 ```{r}
 # workshop info is not yet in md file, if it is could import from there
 workshops <- tibble::tribble(
-          ~Date,  ~Event,  ~www,   ~Location,  ~Instructors,
-          "March 2023", "UCLouvain",  NA,  "Brussels", "Laurent Gatto",
-       "31 July 2023",  "BioC2023",  "https://bioc2023.bioconductor.org/",  "Boston",  "TBA",
-  "18 September 2023",  "EuroBioC2023", "https://eurobioc2023.bioconductor.org/",  "Ghent", "TBA",
- "12/13 October 2023", "Carnegie Institution", "https://bse.carnegiescience.edu", "Baltimore", "Javier Carpinteyro-Ponce, Frederick Tan"
+          ~Date,  ~`Hosted By`,  ~host_url, ~Workshop, ~workshop_url, ~Location,  ~Instructors,
+          "12-13 September 2022", "EuroBioC2022",  "https://eurobioc2022.bioconductor.org/", "bioc-intro", "https://bioconductor.github.io/2022-09-12-BiocIntro-Heidelberg/", "Heidelberg", "Charlotte Soneson, Laurent Gatto",
+          "2022", "UCLouvain",  NA, "bioc-intro", NA,  "Brussels", "Laurent Gatto",
+          "March 2023", "UCLouvain",  NA, "bioc-intro", NA,  "Brussels", "Laurent Gatto",
+          "2023", NA,  NA, "bioc-intro", NA,  "Uzhhorod", "Laurent Gatto",
+          "22-26 May 2023", "Galaxy Smörgåsbord 2023",  "https://gallantries.github.io/video-library/events/smorgasbord3/", "bioc-intro", "https://gallantries.github.io/video-library/modules/bioconductor",  "online", "Laurent Gatto",
+          "22-26 May 2023", "Galaxy Smörgåsbord 2023",  "https://gallantries.github.io/video-library/events/smorgasbord3/", "bioc-project", "https://gallantries.github.io/video-library/modules/bioconductor",  "online", "Kevin Rue-Albrecht",
+       "31 July-1 August 2023",  "BioC2023",  "https://bioc2023.bioconductor.org/",  "bioc-intro", "https://bioconductor.github.io/2023-07-31-BiocRnaseq-Bioc2023/", "Boston",  "Jenny Drnevich, Sehyun Oh",
+  "18-19 September 2023",  "EuroBioC2023", "https://eurobioc2023.bioconductor.org/", "bioc-intro", "https://bioconductor.github.io/2023-09-18-BiocIntro-EuroBioc/", "Ghent", "Laurent Gatto, Charlotte Hutchings, Olly Crook, Givanna Putri, Marcel Ramos Pérez",
+   "18-19 September 2023",  "EuroBioC2023", "https://eurobioc2023.bioconductor.org/", "bioc-rnaseq", "https://bioconductor.github.io/2023-09-18-RNASeq-EuroBioc/", "Ghent", "Soneson Charlotte, Almut Lütge, Fabricio Almeida-Silva",
+ "12-13 October 2023", "Carnegie Institution", "https://bse.carnegiescience.edu", "bioc-rnaseq", NA, "Baltimore", "Javier Carpinteyro-Ponce, Frederick Tan",
+  "15 October 2023", "BioCAsia2023", "https://biocasia2023.bioconductor.org/", "bioc-rnaseq", NA, "Hong Kong", "David Shih",
+  "November 2023", NA, NA, "bioc-rnaseq", NA, "Belém", "Rodrigo Arcoverde Cerveira da Silva",
+ "2023", "Savitribai Phule Pune University", "http://www.unipune.ac.in/", "bioc-intro", NA, "Pune", "Leo Lahti",
+  "2023", NA, NA, "bioc-intro", NA, "Oulu", "Leo Lahti",
+ "2023", NA, NA, "bioc-intro", NA, "Norway", "Leo Lahti"
   ) 
 ```
 
@@ -34,13 +45,12 @@ workshops_geocoded <- workshops |>
   mutate_geocode(Location)
 ```
 
-
 ```{r}
 world <- map_data("world")
 
 gg <- ggplot() +
   geom_polygon(data = world, aes(x = long, y = lat, group = group), fill = "grey") +
-  geom_jitter(data = workshops_geocoded, aes(x = lon, y = lat, text = paste(Event, Location, sep = "\n")), color = 'red') +
+  geom_jitter(data = workshops_geocoded, aes(x = lon, y = lat, text = paste(`Hosted By`, Location, sep = "\n")), color = 'red') +
   theme_void()
 
 ggplotly(gg, tooltip = "text")
@@ -48,11 +58,15 @@ ggplotly(gg, tooltip = "text")
 
 ```{r}
 workshops_geocoded |> 
-  select(-lon, -lat, -www) |>
+  select(-lon, -lat, -host_url, -workshop_url) |>
   reactable(columns = list(
-    Event = colDef(cell = function(value, index) {
+   `Hosted By` = colDef(cell = function(value, index) {
       # Render as a link
-      htmltools::tags$a(href = workshops_geocoded$www[index], target = "_blank", as.character(value))
+      htmltools::tags$a(href = workshops_geocoded$host_url[index], target = "_blank", as.character(value))
+      }),
+    Workshop = colDef(cell = function(value, index) {
+      # Render as a link
+      htmltools::tags$a(href = workshops_geocoded$workshop_url[index], target = "_blank", as.character(value))
       })
     ), 
     defaultPageSize = 100)
