@@ -35,7 +35,7 @@ workshops <- tibble::tribble(
     "22-26 May 2023", "Galaxy Smörgåsbord 2023",  "https://gallantries.github.io/video-library/events/smorgasbord3/", "bioc-intro", "https://gallantries.github.io/video-library/modules/bioconductor",  "online", "Laurent Gatto",
     "March 2023", "University of Illinois",  "https://illinois.edu/", "bioc-intro", NA,  "Champaign", "Jenny Drnevich, Jessica Holmes, Negin Valizadegan",
     "March 2023", "UCLouvain",  NA, "bioc-intro", NA,  "Brussels", "Laurent Gatto",
-    "2023", "Savitribai Phule Pune University", "http://www.unipune.ac.in/", "bioc-intro", NA, "Pune", "Leo Lahti",
+    "21-24 Feb 2023", "Savitribai Phule Pune University", "http://www.unipune.ac.in/", "bioc-intro", NA, "Pune", "Leo Lahti",
     "2023", NA,  NA, "bioc-intro", NA,  "Uzhhorod", "Laurent Gatto",
     "12-13 September 2022", "EuroBioC2022",  "https://eurobioc2022.bioconductor.org/", "bioc-intro", "https://bioconductor.github.io/2022-09-12-BiocIntro-Heidelberg/", "Heidelberg", "Charlotte Soneson, Laurent Gatto",
     "1, 8, 15, 22 June 2022", "Australian BioCommons", "https://www.biocommons.org.au/", "bioc-intro", "https://zenodo.org/records/6766951", "online", "Saskia Freytag, Adele Barugahare, Maria Doyle, Brendan Ansell",
