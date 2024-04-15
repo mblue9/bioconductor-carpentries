@@ -22,7 +22,7 @@ Workshops using the [Bioconductor Carpentries](https://www.bioconductor.org/help
 workshops <- tibble::tribble(
           ~Date,  ~`Hosted By`,  ~host_url, ~Workshop, ~workshop_url, ~Location,  ~Instructors,
     "March 2024", "University of Illinois",  "https://illinois.edu/", "bioc-intro", NA,  "Champaign", "Jenny Drnevich, Negin Valizadegan, Yifei Kang",
-    "November 2023", NA, NA, "bioc-rnaseq", NA, "Belém", "Rodrigo Arcoverde Cerveira da Silva",
+    "November 2023", "Instituto Evandro Chagas", "https://www.gov.br/iec/pt-br", "bioc-rnaseq", NA, "Belém", "Rodrigo Arcoverde Cerveira da Silva",
     "15 October 2023", "BioCAsia2023", "https://biocasia2023.bioconductor.org/", "bioc-rnaseq", NA, "Hong Kong", "David Shih",
     "12-13 October 2023", "Carnegie Institution", "https://bse.carnegiescience.edu", "bioc-rnaseq", NA, "Baltimore", "Javier Carpinteyro-Ponce, Frederick Tan",
     "9-12 October 2023", "University of Bergen", "https://www.uib.no/en", "bioc-intro", NA, "Bergen", "Leo Lahti",
@@ -42,7 +42,6 @@ workshops <- tibble::tribble(
     "2022", "UCLouvain",  NA, "bioc-intro", NA,  "Brussels", "Laurent Gatto"
   ) 
 ```
-
 
 ```{r}
 # get coordinates to map
