@@ -103,8 +103,7 @@ world_map <- map_data("world") |>
 gg <- ggplot() +
   geom_polygon(data = world_map, aes(x = long, y = lat, group = group), fill = "grey85", color = "white") +  # Pale grey countries with white borders
   geom_jitter(data = all, aes(x = lon, y = lat, text = paste(Name, Institution, sep = "\n"), 
-                              colour = Status, fill = Status, shape = Status, size = Status), 
-              width = 1, height = 1) +  # Add jitter for better separation
+                              colour = Status, fill = Status, shape = Status, size = Status)) +
   scale_colour_manual(values = c(
     "Certified" = "#0072B2", 
     "Certified - CZI Year 1" = "#009E73", 
