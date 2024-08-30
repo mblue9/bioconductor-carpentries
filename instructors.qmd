@@ -37,8 +37,8 @@ instructors_geocoded <- instructors |>
 ```{r}
 #| echo: false
 
-# add instructor trainees from Bioc Carpentries 
-trainees <- tibble::tribble(
+# add instructor trainees from Bioc Carpentries year 1
+trainees_yr1 <- tibble::tribble(
                                   ~Name,                                                   ~Institution,    ~Location,  ~Status,        ~lon,        ~lat,
                "Fabricio Almeida-Silva",                   "VIB-UGent Center for Plant Systems Biology",      "Ghent",  "Certified - CZI Year 1",  3.7303351,  51.0500182,
                   "Anand Ruban Agarvas",                               "University Hospital Heidelberg", "Heidelberg",  "Certified - CZI Year 1",     8.6724335,  49.3987524,
@@ -61,10 +61,39 @@ trainees <- tibble::tribble(
   )
 ```
 
+
+```{r}
+# add instructor trainees from Bioc Carpentries year 2
+trainees_yr2 <- tibble::tribble(
+  ~Name, ~Institution, ~Location, ~Status, ~lon, ~lat,
+  "Kevin Stachelek", "University of Southern California", "Los Angeles", "In Progress", -118.285117, 34.0223519,
+  "Erick Isaac Navarro Delgado", "University of British Columbia", "Vancouver", "In Progress", -123.1139524, 49.2608724,
+  "Pedro Baldoni", "Walter and Eliza Hall Institute of Medical Research", "Melbourne", "Certified - CZI Year 2", 144.9582768, -37.7982827,
+  "Princess Rodriguez", "University of Vermont", "Burlington", "In Progress", -73.212072, 44.4758825,
+  "Tim Triche", "Van Andel Institute", "Grand Rapids", "Certified - CZI Year 2", -85.6680863, 42.9633604,
+  "Izabela Mamede", "Universidade Federal de Minas Gerais", "Belo Horizonte", "Certified - CZI Year 2", -43.9678357, -19.870682,
+  "Jacques Serizay", "Institut Pasteur", "Paris", "In Progress", 2.3522219, 48.856614,
+  "Robert Ivanek", "University of Basel, Swiss Institute of Bioinformatics", "Basel", "Certified - CZI Year 2", 7.5885761, 47.5595986,
+  "Hamdi Furkan Kepenek", "Abdullah Gül University", "Kayseri", "In Progress", 35.4867691, 38.731229,
+  "陈秭如", "GuangZhou Lab", "Guangzhou", "In Progress", 113.264435, 23.129163,
+  "Amal Boukteb", "National Institute for Agricultural Research of Tunisia (INRAT)", "Tunis", "Certified - CZI Year 2", 10.1815316, 36.8064948,
+  "Arnab Mukherjee", "Manipal Institute of Technology", "Manipal", "Certified - CZI Year 2", 74.7928923, 13.3532052,
+  "Harvinder Singh", "Department of Translational and Regenerative Medicine, PGIMER", "Chandigarh", "In Progress", 76.779418, 30.733315,
+  "Janani Ravi", "University of Colorado Anschutz Medical Campus", "Aurora", "In Progress", -104.991531, 39.742043
+)
+```
+
+```
+
 ```{r}
 # Combine
-all <- bind_rows(instructors_geocoded, trainees) |> 
-  mutate(Status = factor(Status, levels = c("Certified", "Certified - CZI Year 1", "In Progress")))
+all <- bind_rows(instructors_geocoded, trainees_yr1, trainees_yr2) |> 
+  mutate(Status = factor(Status, levels = c(
+  "Certified", 
+  "Certified - CZI Year 1", 
+  "Certified - CZI Year 2", 
+  "In Progress")
+  ))
 ```
 
 ```{r}
@@ -75,10 +104,23 @@ world_map <- subset(world_map, region != "Antarctica")
 gg <- ggplot() +
   geom_polygon(data = world_map, aes(x = long, y = lat, group = group), fill = "grey") +
   geom_jitter(data = all, aes(x = lon, y = lat, text = paste(Name, Institution, sep = "\n"), colour = Status, shape = Status, size = Status)) +
-  scale_colour_manual(values = c("Certified"="blue", "Certified - CZI Year 1"="gold", "In Progress"="red")) +
-  scale_shape_manual(values = c("Certified"=20, "Certified - CZI Year 1"=18, "In Progress"=20)) +
-  scale_size_manual(values = c("Certified"=1, "Certified - CZI Year 1"=1, "In Progress"=1)) +
-  theme_void()
+  scale_colour_manual(values = c(
+  "Certified"="#0072B2", 
+  "Certified - CZI Year 1"="#009E73", 
+  "Certified - CZI Year 2"="#CC79A7", 
+  "In Progress"="#E69F00")) +
+  scale_shape_manual(values = c(
+  "Certified" = 21,  # Circle
+  "Certified - CZI Year 1" = 22,  # Square
+  "Certified - CZI Year 2" = 24,  # Diamond
+  "In Progress" = 21  # Circle
+)) +
+scale_size_manual(values = c(
+  "Certified" = 1.5, 
+  "Certified - CZI Year 1" = 1.5,  
+  "Certified - CZI Year 2" = 1.5,  
+  "In Progress" = 1.5
+))
 
 ggplotly(gg, tooltip = "text") |> 
   layout(width=700, height=450,
@@ -112,14 +154,3 @@ However, looking at the world population density below from [Our World in Data](
 <iframe src="https://ourworldindata.org/grapher/population-density" loading="lazy" style="width: 100%; height: 600px; border: 0px none;">
 
 </iframe>
-
-```{r}
-
-all |>   
-    select(Name, Institution, Location, Status) |> 
-  reactable(
-    defaultSorted = "Name",
-    defaultPageSize = 100)
-
-
-```
