@@ -93,8 +93,13 @@ all |>
     select(Name, Institution, Location, Status) |> 
   reactable(columns = list(
     Name = colDef(cell = function(value, index) {
-      # Render as a link
-      htmltools::tags$a(href = all$www[index], target = "_blank", as.character(value))
+      if (is.na(all$www[index])) {
+        # If URL is NA, just display the name without a link
+        value
+        } else {
+          # Render as a proper HTML link
+          htmltools::tags$a(href = all$www[index], target = "_blank", value)
+          }
       })
     ), 
     defaultSorted = "Name",
@@ -107,3 +112,14 @@ However, looking at the world population density below from [Our World in Data](
 <iframe src="https://ourworldindata.org/grapher/population-density" loading="lazy" style="width: 100%; height: 600px; border: 0px none;">
 
 </iframe>
+
+```{r}
+
+all |>   
+    select(Name, Institution, Location, Status) |> 
+  reactable(
+    defaultSorted = "Name",
+    defaultPageSize = 100)
+
+
+```

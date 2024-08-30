@@ -66,13 +66,21 @@ workshops_geocoded |>
   select(-lon, -lat, -host_url, -workshop_url) |>
   reactable(columns = list(
    `Hosted By` = colDef(cell = function(value, index) {
-      # Render as a link
-      htmltools::tags$a(href = workshops_geocoded$host_url[index], target = "_blank", as.character(value))
-      }),
+      # Check if the URL is not NA, then render as a link, otherwise just display the name
+      if (!is.na(workshops_geocoded$host_url[index])) {
+        htmltools::tags$a(href = workshops_geocoded$host_url[index], target = "_blank", as.character(value))
+      } else {
+        as.character(value)  # Just display the name without a link
+      }
+    }),
     Workshop = colDef(cell = function(value, index) {
-      # Render as a link
-      htmltools::tags$a(href = workshops_geocoded$workshop_url[index], target = "_blank", as.character(value))
-      })
-    ), 
-    defaultPageSize = 100)
+      # Check if the URL is not NA, then render as a link, otherwise just display the workshop title
+      if (!is.na(workshops_geocoded$workshop_url[index])) {
+        htmltools::tags$a(href = workshops_geocoded$workshop_url[index], target = "_blank", as.character(value))
+      } else {
+        as.character(value)  # Just display the workshop title without a link
+      }
+    })
+  ), 
+  defaultPageSize = 100)
 ```
