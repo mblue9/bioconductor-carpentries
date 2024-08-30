@@ -15,10 +15,11 @@ library(tidyr)
 library(reactable)
 library(ggmap)
 library(plotly)
+library(ggplot2)
 ```
 
 ```{r}
-# import data and format
+# Import data and format
 instructors <- read_delim("https://raw.githubusercontent.com/Bioconductor/bioconductor-teaching/devel/bioc-instructors.md", delim = '|', trim_ws = TRUE) |> 
   filter(Name != "----------") |> 
   mutate(Status = "Certified")
@@ -29,41 +30,40 @@ Map and table showing people in the Bioconductor community who are certified Car
 See [this page](workshops.html) for Bioconductor Carpentries Workshops.
 
 ```{r}
-# get coordinates to map
+# Get coordinates to map
 instructors_geocoded <- instructors |> 
   mutate_geocode(Location)
 ```
 
 ```{r}
-#| echo: false
 
-# add instructor trainees from Bioc Carpentries year 1
+# Add instructor trainees from Bioc Carpentries Year 1
 trainees_yr1 <- tibble::tribble(
-                                  ~Name,                                                   ~Institution,    ~Location,  ~Status,        ~lon,        ~lat,
-               "Fabricio Almeida-Silva",                   "VIB-UGent Center for Plant Systems Biology",      "Ghent",  "Certified - CZI Year 1",  3.7303351,  51.0500182,
-                  "Anand Ruban Agarvas",                               "University Hospital Heidelberg", "Heidelberg",  "Certified - CZI Year 1",     8.6724335,  49.3987524,
-                         "Oliver Crook",                                          "University of Oxford",     "Oxford",  "Certified - CZI Year 1",    -1.2577263,  51.7520209,
-                          "Almut Lütge", "University of Zürich",     "Zurich",  "Certified - CZI Year 1",      8.541694,  47.3768866,
-                            "Leo Lahti",                                          "University of Turku",      "Turku",  "Certified - CZI Year 1",    22.2666303,  60.4518126,
-                            "Sehyun Oh",                                  "City University of New York",   "New York",  "Certified - CZI Year 1",   -74.0059728,  40.7127753,
-                           "Umar Ahmad",                                      "Bauchi State University",      "Gadau",  "In Progress",    10.1661239,  11.8328495,
-                        "Chia Sin Liew",                               "University of Nebraska-Lincoln",   "Nebraska",  "Certified - CZI Year 1",   -99.9018131,  41.4925374,
-                  "Charlotte Hutchings",                                      "University of Cambridge",  "Cambridge",  "Certified - CZI Year 1",     0.1312729,  52.1950788,
-                   "Roberto Carlos Álvarez Martínez",                       "Universidad Autonoma de Queretaro",  "Mexico",  "In Progress",    -102.552784,  23.634501,
-                           "David Shih",                                      "University of Hong Kong",  "Hong Kong",  "Certified - CZI Year 1",   114.1693611,  22.3193039,
-  "Rodrigo Arcoverde Cerveira da Silva",                                        "Karolinska Institute",  "Stockholm",  "Certified - CZI Year 1",    18.0685808,  59.3293235,
-             "Javier Carpinteyro Ponce",                                       "University of Maryland",   "Maryland",  "Certified - CZI Year 1",   -76.6412712,  39.0457549,
-                           "Zuguang Gu",                                "German Cancer Research Center", "Heidelberg",  "Certified - CZI Year 1",     8.6724335,  49.3987524,
-                        "Givanna Putri",          "Walter and Eliza Hall Institute of Medical Research",  "Melbourne",  "Certified - CZI Year 1",   144.9630576, -37.8136276,
-                     "Zedias Chikwambi",                            "Chinhoyi University of Technology",   "Chinhoyi",  "Certified - CZI Year 1",    30.1987245, -17.3622214,
-                  "Pageneck Chikondowa",       "African Institute of Biomedical Science and Technology",     "Harare",  "Certified - CZI Year 1",    31.0492259, -17.8216288,
-                          "Marie Hidjo",       "African Institute of Biomedical Science and Technology",     "Harare",  "Certified - CZI Year 1",    31.0492259, -17.8216288
-  )
+  ~Name, ~Institution, ~Location, ~Status, ~lon, ~lat,
+  "Fabricio Almeida-Silva", "VIB-UGent Center for Plant Systems Biology", "Ghent", "Certified - CZI Year 1", 3.7303351, 51.0500182,
+  "Anand Ruban Agarvas", "University Hospital Heidelberg", "Heidelberg", "Certified - CZI Year 1", 8.6724335, 49.3987524,
+  "Oliver Crook", "University of Oxford", "Oxford", "Certified - CZI Year 1", -1.2577263, 51.7520209,
+  "Almut Lütge", "University of Zürich", "Zurich", "Certified - CZI Year 1", 8.541694, 47.3768866,
+  "Leo Lahti", "University of Turku", "Turku", "Certified - CZI Year 1", 22.2666303, 60.4518126,
+  "Sehyun Oh", "City University of New York", "New York", "Certified - CZI Year 1", -74.0059728, 40.7127753,
+  "Umar Ahmad", "Bauchi State University", "Gadau", "In Progress", 10.1661239, 11.8328495,
+  "Chia Sin Liew", "University of Nebraska-Lincoln", "Nebraska", "Certified - CZI Year 1", -99.9018131, 41.4925374,
+  "Charlotte Hutchings", "University of Cambridge", "Cambridge", "Certified - CZI Year 1", 0.1312729, 52.1950788,
+  "Roberto Carlos Álvarez Martínez", "Universidad Autonoma de Queretaro", "Mexico", "In Progress", -102.552784, 23.634501,
+  "David Shih", "University of Hong Kong", "Hong Kong", "Certified - CZI Year 1", 114.1693611, 22.3193039,
+  "Rodrigo Arcoverde Cerveira da Silva", "Karolinska Institute", "Stockholm", "Certified - CZI Year 1", 18.0685808, 59.3293235,
+  "Javier Carpinteyro Ponce", "University of Maryland", "Maryland", "Certified - CZI Year 1", -76.6412712, 39.0457549,
+  "Zuguang Gu", "German Cancer Research Center", "Heidelberg", "Certified - CZI Year 1", 8.6724335, 49.3987524,
+  "Givanna Putri", "Walter and Eliza Hall Institute of Medical Research", "Melbourne", "Certified - CZI Year 1", 144.9630576, -37.8136276,
+  "Zedias Chikwambi", "Chinhoyi University of Technology", "Chinhoyi", "Certified - CZI Year 1", 30.1987245, -17.3622214,
+  "Pageneck Chikondowa", "African Institute of Biomedical Science and Technology", "Harare", "Certified - CZI Year 1", 31.0492259, -17.8216288,
+  "Marie Hidjo", "African Institute of Biomedical Science and Technology", "Harare", "Certified - CZI Year 1", 31.0492259, -17.8216288
+)
 ```
 
 
 ```{r}
-# add instructor trainees from Bioc Carpentries year 2
+# Add instructor trainees from Bioc Carpentries Year 2
 trainees_yr2 <- tibble::tribble(
   ~Name, ~Institution, ~Location, ~Status, ~lon, ~lat,
   "Kevin Stachelek", "University of Southern California", "Los Angeles", "In Progress", -118.285117, 34.0223519,
@@ -83,10 +83,9 @@ trainees_yr2 <- tibble::tribble(
 )
 ```
 
-```
 
 ```{r}
-# Combine
+# Combine all data
 all <- bind_rows(instructors_geocoded, trainees_yr1, trainees_yr2) |> 
   mutate(Status = factor(Status, levels = c(
   "Certified", 
@@ -98,33 +97,44 @@ all <- bind_rows(instructors_geocoded, trainees_yr1, trainees_yr2) |>
 
 ```{r}
 # Map of instructors
-world_map <- map_data("world")
-world_map <- subset(world_map, region != "Antarctica")
+world_map <- map_data("world") |> 
+  filter(region != "Antarctica")
 
 gg <- ggplot() +
-  geom_polygon(data = world_map, aes(x = long, y = lat, group = group), fill = "grey") +
-  geom_jitter(data = all, aes(x = lon, y = lat, text = paste(Name, Institution, sep = "\n"), colour = Status, shape = Status, size = Status)) +
+  geom_polygon(data = world_map, aes(x = long, y = lat, group = group), fill = "grey85", color = "white") +  # Pale grey countries with white borders
+  geom_jitter(data = all, aes(x = lon, y = lat, text = paste(Name, Institution, sep = "\n"), colour = Status,
+                              shape = Status, size = Status), width = 1, height = 1) +  # Add jitter for better separation
   scale_colour_manual(values = c(
-  "Certified"="#0072B2", 
-  "Certified - CZI Year 1"="#009E73", 
-  "Certified - CZI Year 2"="#CC79A7", 
-  "In Progress"="#E69F00")) +
+    "Certified" = "#0072B2", 
+    "Certified - CZI Year 1" = "#009E73", 
+    "Certified - CZI Year 2" = "#CC79A7", 
+    "In Progress" = "#E69F00")) +
   scale_shape_manual(values = c(
-  "Certified" = 21,  # Circle
-  "Certified - CZI Year 1" = 22,  # Square
-  "Certified - CZI Year 2" = 24,  # Diamond
-  "In Progress" = 21  # Circle
-)) +
-scale_size_manual(values = c(
-  "Certified" = 1.5, 
-  "Certified - CZI Year 1" = 1.5,  
-  "Certified - CZI Year 2" = 1.5,  
-  "In Progress" = 1.5
-))
+    "Certified" = 21,  # Filled Circle
+    "Certified - CZI Year 1" = 22,  # Filled Square
+    "Certified - CZI Year 2" = 24,  # Filled Diamond
+    "In Progress" = 21  # Filled Circle
+  )) +
+  scale_size_manual(values = c(
+    "Certified" = 2, 
+    "Certified - CZI Year 1" = 2,  
+    "Certified - CZI Year 2" = 2,  
+    "In Progress" = 2
+  )) +
+  coord_sf(xlim = c(-180, 180), ylim = c(-60, 90), expand = FALSE) +  # Adjust x and y limits to minimize white space
+  theme_void() +
+  theme(
+    panel.background = element_rect(fill = "white", color = NA),  # White background
+    axis.line = element_blank(),  # No axis lines
+    axis.text = element_blank(),  # No axis text
+    axis.ticks = element_blank(),  # No axis ticks
+    plot.background = element_rect(fill = "white", color = NA)  # Ensure no background around the map
+  )
 
 ggplotly(gg, tooltip = "text") |> 
-  layout(width=700, height=450,
-         legend = list(orientation = "h", x = 0.25, y = -0.02))
+  layout(xaxis = list(showline = FALSE, showticklabels = FALSE, zeroline = FALSE, title_standoff = 5),
+         yaxis = list(showline = FALSE, showticklabels = FALSE, zeroline = FALSE))
+
 ```
 
 <br></br>
