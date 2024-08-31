@@ -16,7 +16,7 @@ jobs:
         GGMAP_GOOGLE_API_KEY: ${{ secrets.GOOGLE_MAPS_KEY }}  
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
