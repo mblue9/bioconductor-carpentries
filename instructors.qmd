@@ -121,10 +121,10 @@ gg <- ggplot() +
     "In Progress" = 21  # Filled Circle
   )) +
   scale_size_manual(values = c(
-    "Certified" = 2, 
-    "Certified - CZI Year 1" = 2,  
-    "Certified - CZI Year 2" = 2,  
-    "In Progress" = 2
+    "Certified" = 1, 
+    "Certified - CZI Year 1" = 1,  
+    "Certified - CZI Year 2" = 1,  
+    "In Progress" = 1
   )) +
   coord_sf(xlim = c(-180, 180), ylim = c(-60, 90), expand = FALSE) +  # Adjust x and y limits to minimize white space
   theme_void() +
